@@ -36,8 +36,10 @@
             </div>
             <div>
                 <button type="submit">Add Car</button>
-            </div>
+                <button type="reset" value="Reset" @click="resetNewCar">Reset</button>
+            </div>           
         </form>
+
     </div>
 </template>
 
@@ -69,6 +71,10 @@ export default {
             carsService.addCar(this.newCar);
             this.newCar = this.getDefaults();
             this.$router.push('/cars')
+        },
+
+        resetNewCar () {
+            this.newCar = this.getDefaults();
         }
     }
 
