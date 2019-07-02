@@ -9,7 +9,8 @@ import AddCar from '@/components/AddCar'
 
 const routes = [
   { path: '/cars', component: AppCars},
-  { path: '/cars/add', component: AddCar }
+  { path: '/cars/add', component: AddCar },
+  { path: '/edit/:id', component: AddCar}
 ]
 
 const router = new VueRouter({

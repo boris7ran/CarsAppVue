@@ -24,7 +24,11 @@
                     <td>{{ car.isAutomatic }}</td>
                     <td>{{ car.engine }}</td>
                     <td>{{ car.numberOfDoors }}</td>
-                    <td><button>Edit</button></td>
+                    <td>
+                        <router-link :to="routeToEdit(car)">
+                            <button>Edit</button>
+                        </router-link>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -49,6 +53,12 @@ export default {
             }).catch(error => {
                 alert(error);
             });
+    },
+
+    methods: {
+        routeToEdit (car) {
+            return `/edit/${car.id}`
+        }
     }
 }
 </script>

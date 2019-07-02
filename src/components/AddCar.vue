@@ -38,6 +38,7 @@
                 <button type="submit">Add Car</button>
                 <button type="reset" value="Reset" @click="resetNewCar">Reset</button>
                 <button type="button" @click="previewCar">Preview</button>
+                <button type="button" v-if="editable" @click="editCar">Edit</button>
             </div>           
         </form>
 
@@ -51,7 +52,8 @@ export default {
     data () {
         return {
             newCar: this.getDefaults(), 
-            years: new Array(42).fill(1978).map((n, i) => n + i)          
+            years: new Array(42).fill(1978).map((n, i) => n + i),
+            editable: false        
         }
     },
 
@@ -84,8 +86,24 @@ export default {
                     if (this.newCar[key]) {
                         alertCar[key] = this.newCar[key];
                     }
-                })
+                })  
             alert(JSON.stringify(alertCar));
+        },
+
+        editCar () {
+            carsService.edit(this.$route.params.id, this.newCar);
+        }
+    },
+
+    mounted () {
+        if (this.$route.params.id) {
+            this.editable = true;
+            carsService.get(this.$route.params.id)
+                .then(response => {
+                    this.newCar = response.data;
+                }).catch(error => {
+                    alert(error);
+                })
         }
     }
 
