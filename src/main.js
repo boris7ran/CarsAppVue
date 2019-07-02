@@ -5,9 +5,11 @@ import App from './App.vue'
 Vue.use(VueRouter)
 
 import AppCars from '@/components/AppCars'
+import AddCar from '@/components/AddCar'
 
 const routes = [
-  { path: '/cars', component: AppCars}
+  { path: '/cars', component: AppCars},
+  { path: '/cars/add', component: AddCar }
 ]
 
 const router = new VueRouter({

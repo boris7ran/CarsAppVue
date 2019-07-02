@@ -2,6 +2,7 @@
   <div id="app">
     <ul>
       <li><router-link to="/cars">Cars</router-link></li> 
+      <li><router-link to="/cars/add">Add</router-link></li> 
     </ul>
 
     <router-view/>
