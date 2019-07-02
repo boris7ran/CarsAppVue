@@ -11,6 +11,7 @@
                     <th>AUTOMATIC</th>
                     <th>ENGINE</th>
                     <th>DOORS</th>
+                    <th>ACTIONS</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,6 +24,7 @@
                     <td>{{ car.isAutomatic }}</td>
                     <td>{{ car.engine }}</td>
                     <td>{{ car.numberOfDoors }}</td>
+                    <td><button>Edit</button></td>
                 </tr>
             </tbody>
         </table>

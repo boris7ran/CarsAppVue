@@ -85,8 +85,7 @@ export default {
                         alertCar[key] = this.newCar[key];
                     }
                 })
-            console.log(alertCar);
-            alert(alertCar);
+            alert(JSON.stringify(alertCar));
         }
     }
 
