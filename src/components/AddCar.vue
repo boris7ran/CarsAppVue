@@ -3,11 +3,11 @@
         <form @submit.prevent="handleAdd">
             <div>
                 <label for="brand">Brand</label>
-                <input type="text" id="brand" v-model="newCar.brand" required>
+                <input type="text" minlength="2" id="brand" v-model="newCar.brand" required>
             </div>
             <div>
                 <label for="model">Model</label>
-                <input type="text" id="model" v-model="newCar.model" required>
+                <input type="text" minlength="2" id="model" v-model="newCar.model" required>
             </div>
             <div>
                 <label for="year">Year</label><br>
@@ -17,7 +17,7 @@
             </div>
             <div>
                 <label for="maxSpeed">Maximum Speed</label>
-                <input type="nubmer" id="maxSpeed" v-model="newCar.maxSpeed" required>
+                <input type="nubmer" id="maxSpeed" v-model="newCar.maxSpeed">
             </div>
             <div>
                 <label for="numberOfDoors">Number of Doors</label>
@@ -29,14 +29,15 @@
             </div>
             <div>
                 <label for="engine">Engine</label><br>
-                <input type="radio" name="diesel" for="engine" value="diesel" v-model="newCar.engine"> Diesel<br>
-                <input type="radio" name="petrol" for="engine" value="petrol" v-model="newCar.engine">Petrol<br>
-                <input type="radio" name="electric" for="engine" value="electric" v-model="newCar.engine">Electric<br>
-                <input type="radio" name="hybrid" for="engine" value="hybrid" v-model="newCar.engine">Hybrid
+                <input type="radio" name="engine" for="engine" value="diesel" v-model="newCar.engine" required> Diesel<br>
+                <input type="radio" name="engine" for="engine" value="petrol" v-model="newCar.engine">Petrol<br>
+                <input type="radio" name="engine" for="engine" value="electric" v-model="newCar.engine">Electric<br>
+                <input type="radio" name="engine" for="engine" value="hybrid" v-model="newCar.engine">Hybrid
             </div>
             <div>
                 <button type="submit">Add Car</button>
                 <button type="reset" value="Reset" @click="resetNewCar">Reset</button>
+                <button type="button" @click="previewCar">Preview</button>
             </div>           
         </form>
 
@@ -75,6 +76,17 @@ export default {
 
         resetNewCar () {
             this.newCar = this.getDefaults();
+        },
+
+        previewCar () {
+            let alertCar = {};
+            Object.keys(this.newCar).forEach(key => {
+                    if (this.newCar[key]) {
+                        alertCar[key] = this.newCar[key];
+                    }
+                })
+            console.log(alertCar);
+            alert(alertCar);
         }
     }
 
