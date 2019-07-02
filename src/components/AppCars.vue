@@ -25,9 +25,12 @@
                     <td>{{ car.engine }}</td>
                     <td>{{ car.numberOfDoors }}</td>
                     <td>
-                        <router-link :to="routeToEdit(car)">
-                            <button>Edit</button>
-                        </router-link>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <router-link :to="routeToEdit(car)">
+                                <button type="button">Edit</button>
+                            </router-link>
+                            <button type="button" @click="routeToDelete(car.id)">Delete</button>
+                        </div>
                     </td>
                 </tr>
             </tbody>
@@ -49,7 +52,6 @@ export default {
         carsService.getAll()
             .then(response => {
                 this.cars = response.data;
-                console.log(response)
             }).catch(error => {
                 alert(error);
             });
@@ -58,6 +60,16 @@ export default {
     methods: {
         routeToEdit (car) {
             return `/edit/${car.id}`
+        },
+
+        routeToDelete (id) {
+            carsService.delete(id)
+                .then(response => {
+                    this.$router.go();
+                }).catch(error => {
+                    alert(error);
+                })
+                
         }
     }
 }

@@ -71,9 +71,14 @@ export default {
         },
 
         handleAdd() {
-            carsService.addCar(this.newCar);
-            this.newCar = this.getDefaults();
-            this.$router.push('/cars')
+            carsService.addCar(this.newCar)
+                .then( response => {
+                    this.newCar = this.getDefaults();
+                    this.$router.push('/cars')
+                }).catch(error => {
+                    alert(error);
+                });
+            
         },
 
         resetNewCar () {
