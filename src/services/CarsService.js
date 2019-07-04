@@ -10,6 +10,7 @@ export default class CarsService {
     }
 
     addCar (newCar) {
+        delete newCar.id;
         return axios.post('cars', newCar)
     }
 

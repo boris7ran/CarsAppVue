@@ -1,40 +1,40 @@
 <template>
     <div class="container-fluid">
         <form @submit.prevent="handleAdd">
-            <div>
+            <div class="form-group">
                 <label for="brand">Brand</label>
                 <input type="text" minlength="2" id="brand" v-model="newCar.brand" required>
             </div>
-            <div>
+            <div class="form-group">
                 <label for="model">Model</label>
                 <input type="text" minlength="2" id="model" v-model="newCar.model" required>
             </div>
-            <div>
+            <div class="form-group">
                 <label for="year">Year</label><br>
                 <select v-model="newCar.year">
                     <option v-for="(year, index) in years" :key="index" :value="year">{{ year }}</option>
                 </select>
             </div>
-            <div>
+            <div class="form-group">
                 <label for="maxSpeed">Maximum Speed</label>
                 <input type="nubmer" id="maxSpeed" v-model="newCar.maxSpeed">
             </div>
-            <div>
+            <div class="form-group">
                 <label for="numberOfDoors">Number of Doors</label>
                 <input type="nubmer" id="numberOfDoors" v-model="newCar.numberOfDoors" required>
             </div>
-            <div>
+            <div class="form-group">
                 <label for="isAutomatic">Automatic</label>
                 <input type="checkbox" name="isAutomatic" id="isAutomatic" v-model="newCar.isAutomatic">
             </div>
-            <div>
+            <div class="form-group">
                 <label for="engine">Engine</label><br>
                 <input type="radio" name="engine" for="engine" value="diesel" v-model="newCar.engine" required> Diesel<br>
                 <input type="radio" name="engine" for="engine" value="petrol" v-model="newCar.engine">Petrol<br>
                 <input type="radio" name="engine" for="engine" value="electric" v-model="newCar.engine">Electric<br>
                 <input type="radio" name="engine" for="engine" value="hybrid" v-model="newCar.engine">Hybrid
             </div>
-            <div>
+            <div class="form-group">
                 <button type="submit">Add Car</button>
                 <button type="reset" value="Reset" @click="resetNewCar">Reset</button>
                 <button type="button" @click="previewCar">Preview</button>
@@ -62,11 +62,11 @@ export default {
             return {
                 brand: "",
                 model: "",
-                year: 0,
-                maxSpeed: 0,
+                year: null,
+                maxSpeed: null,
                 isAutomatic: false,
                 engine: "",
-                numberOfDoors: 0
+                numberOfDoors: null
             }
         },
 
