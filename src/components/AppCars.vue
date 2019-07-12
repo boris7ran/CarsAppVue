@@ -26,6 +26,9 @@
                     <td>{{ car.numberOfDoors }}</td>
                     <td>
                         <div class="btn-group" role="group" aria-label="Basic example">
+                            <router-link :to="routeToShow(car)">
+                                <button type="button">Show</button>
+                            </router-link>
                             <router-link :to="routeToEdit(car)">
                                 <button type="button">Edit</button>
                             </router-link>
@@ -60,6 +63,10 @@ export default {
     methods: {
         routeToEdit (car) {
             return `/edit/${car.id}`
+        },
+
+        routeToShow (car) {
+            return `/cars/${car.id}`
         },
 
         routeToDelete (id) {
