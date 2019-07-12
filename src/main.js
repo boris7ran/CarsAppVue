@@ -7,12 +7,14 @@ Vue.use(VueRouter)
 import AppCars from '@/components/AppCars'
 import AddCar from '@/components/AddCar'
 import LoginUser from '@/components/LoginUser'
+import AppRegister from '@/components/AppRegister'
 
 const routes = [
   { path: '/cars', component: AppCars},
   { path: '/cars/add', component: AddCar },
   { path: '/edit/:id', component: AddCar},
-  { path: '/login', component: LoginUser}
+  { path: '/login', component: LoginUser},
+  { path: '/register', component: AppRegister}
 ]
 
 const router = new VueRouter({
