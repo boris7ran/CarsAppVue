@@ -10,15 +10,15 @@
             <li class="nav-item">
               <router-link to="/cars/add">Add</router-link>
             </li>
-            <li class="nav-item" v-if="!isLogged">
+            <li class="nav-item" v-if="!user">
               <router-link to="/register">Register</router-link>
             </li>
-            <div v-if="!isLogged">
+            <div v-if="!user">
               <li class="nav-item">
                 <router-link to="/login">Login</router-link>
               </li>
             </div>
-            <div v-if="isLogged">
+            <div v-else>
               <li>
                 <button @click="logout">Logout</button>
               </li>
@@ -33,26 +33,29 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from "vuex";
 import { authService } from "./services/Auth";
 
 export default {
   name: "app",
 
-  created() {
-    this.isLogged = authService.isAuthenticated()
-  },
-
-  data() {
-    return {
-      isLogged: authService.isAuthenticated()
-    }
-  },
-
   methods: {
     logout() {
       authService.logout();
+      this.setUser(null);
+      localStorage.removeItem('user');
       this.$router.push("/login");
-    }
+    },
+
+    ...mapMutations({
+      setUser: 'setUser'
+    })
+  },
+
+  computed: {
+    ...mapGetters({
+      user: "getUser"
+    })
   }
 };
 </script>

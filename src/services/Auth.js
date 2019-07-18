@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { mapMutations } from 'vuex'
 
 export default class AuthService {
   constructor(){
@@ -8,9 +9,11 @@ export default class AuthService {
   login(email, password) {
     return axios.post('http://localhost:8000/api/login', {
       email, password
-    }).then(data => {
-      window.localStorage.setItem('loginToken', data.data.token)
+    }).then(({data}) => {
+      window.localStorage.setItem('loginToken', data.token)
+      window.localStorage.setItem('user', JSON.stringify(data.user))
       this.setAxiosDefaultAuthorizationHeader()
+      return data.user;
     })
   }
 
@@ -22,6 +25,7 @@ export default class AuthService {
   logout() {
     window.localStorage.removeItem('loginToken')
     delete axios.defaults.headers.common['Authorization']
+    
   }
 
   isAuthenticated() {

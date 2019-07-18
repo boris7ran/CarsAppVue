@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid">
-    <form @submit.prevent="handleAdd">
+    <form @submit.prevent="submitForm">
       <div class="form-group">
         <label for="email">Email</label>
         <input type="text" minlength="2" id="email" v-model="userLogin.email" required />
@@ -17,32 +17,46 @@
 </template>
 
 <script>
-import { authService } from '@/services/Auth'
+import { mapActions } from "vuex";
 
 export default {
   data() {
     return {
       userLogin: this.getDefaults()
-    }
+    };
   },
 
   methods: {
-    getDefaults () {
+    getDefaults() {
       return {
         email: "",
-        password: "",
-      }
+        password: ""
+      };
     },
 
-    handleAdd() {
-      authService.login(this.userLogin.email, this.userLogin.password)
-        .then( response => {
-          this.userLogin = this.getDefaults();
-          this.$router.push('/cars')
-        }).catch ( error => {
-          alert(error);
-        });
+    ...mapActions({
+      login: "login"
+    }),
+
+    submitForm() {
+      console.log(this.userLogin);
+      this.login({
+        email: this.userLogin.email,
+        password: this.userLogin.password
+      }).then(() => {
+        this.$router.push("/cars");
+      });
     }
+
+    // handleAdd() {
+    //   authService.login(this.userLogin.email, this.userLogin.password)
+    //     .then( response => {
+    //       this.userLogin = this.getDefaults();
+    //       this.$router.push('/cars')
+    //     }).catch ( error => {
+    //       alert(error);
+    //     });
+    // }
   }
 };
 </script>
